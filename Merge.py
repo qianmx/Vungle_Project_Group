@@ -88,19 +88,21 @@ def combine_meta_data(df,meta_tuple,creative_tuple,option = 'both'):
                        quotechar='"',
                        error_bad_lines=False,header=None)
     df_creative_tag.columns = ['creative_id','creative_tag']
+    df_creative_tag = df_creative_tag.groupby('creative_id').creative_tag.apply(list).reset_index()
     # vidoe table
+    '''
     df_video = pd.read_table(creative_tuple[2],
                        warn_bad_lines=False,
                        sep='|',
                        quotechar='"',
                        error_bad_lines=False,header=None)
     df_video.columns = ['video_id','size','id','width','height','duration'] 
-    
+    '''
     b= pd.merge(b, df_creative, how='left', on='creative_id',suffixes=['','_creative'])
     b = pd.merge(b, df_creative_tag, how='left', on='creative_id')
-    b = pd.merge(b, df_video, how='left', on='video_id')
+    #b = pd.merge(b, df_video, how='left', on='video_id')
 
-
+    
 
   return b
 
