@@ -23,12 +23,13 @@ def logistic_model(X_train, y_train):
     print('Train Regression Model')
     model = GridSearchCV(
             estimator=LogisticRegression(),
-            param_grid={'C': [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]},
+            param_grid={'C': [ 0.1, 0.2,0.4,0.6,0.8]},
             scoring='log_loss',
-            cv=5
+            cv=3
     )
     model.fit(X_train, y_train)
     return model
+
 def preprocessing_data(df,numerical_list,string_list,int_list,timestamp_list):
     """
     fill numerical data with avg
@@ -59,8 +60,8 @@ def convert_to_hour(df, columns):
     if isinstance(df, pd.DataFrame):
         for col in columns:
             df[col]= pd.to_datetime(df[col])
-            df[col]=df[col].dt.hour.astype(str)
-
+            df[col]=df[col].dt.hour.astype(str)+'str'
+            df[col] = df[col]+'str'
     
     return df
 
@@ -83,6 +84,8 @@ def convert_to_string(df, columns):
     if isinstance(df, pd.DataFrame):
         for col in columns:
             df[col] = df[col].astype(str)
+            df[col] = df[col]+'str'
+
 
     return df
 
