@@ -49,7 +49,7 @@ def combine_meta_data(df,meta_tuple,creative_tuple,meta_column,creat_col,option 
     common= [i for i in a.columns if '_android' in i]
     common_iso =[i for i in list(set(meta_column[0])&set(meta_column[0])) if i !='market_id']
     for i in range(len(common)):
-        a[common_iso[i]] = a[common_iso[i]].fillna(a[common[i]], inplace=True)
+        a[common_iso[i]].fillna(a[common[i]], inplace=True)
         del a[common[i]]
     
     
